@@ -5,7 +5,6 @@ import {
 } from '@react-navigation/native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
-import LinkingConfiguration from './LinkingConfiguration';
 import StackNav from './stackNav';
 
 export const RootNavigator = () => {
@@ -13,7 +12,7 @@ export const RootNavigator = () => {
   const navigationTheme = theme.dark ? DarkTheme : DefaultTheme;
 
   return (
-    <NavigationContainer theme={navigationTheme} linking={LinkingConfiguration}>
+    <NavigationContainer theme={navigationTheme}>
       <StackNav />
     </NavigationContainer>
   );
