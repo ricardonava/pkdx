@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { List, Title } from 'react-native-paper';
+import { List, Title, Divider } from 'react-native-paper';
 
 const ListItem = ({ title }) => <List.Item title={title} />;
 
@@ -17,7 +17,8 @@ const LocationComponent = (props) => {
     <FlatList
       data={locationInfo}
       renderItem={renderItem}
-      keyExtractor={(index) => index.toString()}
+      keyExtractor={(item) => item.name}
+      ItemSeparatorComponent={Divider}
     />
   );
 };
