@@ -3,7 +3,7 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { Button, Headline, Text, Title, Card } from 'react-native-paper';
+import { Button, Headline, Title } from 'react-native-paper';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
@@ -62,7 +62,7 @@ const InfoComponent = (props) => {
     name,
     id,
     sprite,
-    stats,
+    // stats,
     types,
     height,
     weight,
@@ -86,27 +86,40 @@ const InfoComponent = (props) => {
           ))}
         </RowItems>
         <RowItems>
-          <Title>{weight} KG </Title>
-          <Title> {height} M</Title>
+          <Type>{weight} KG </Type>
+          <Type> {height} M</Type>
         </RowItems>
-        <H1>Base Stats</H1>
+        {/* <H1>Base Stats</H1>
         {stats.map((stat) => (
           <RowItems>
             <Text>{stat.stat.name}: </Text>
             <Text>{stat['base_stat']}</Text>
           </RowItems>
-        ))}
-        <Button
-          mode="contained"
-          onPress={() =>
-            navigate('Location', {
-              locationArea
-            })
-          }
-          color="#84ffff"
-        >
-          Locate
-        </Button>
+        ))} */}
+        <RowItems>
+          <Button
+            mode="contained"
+            onPress={() =>
+              navigate('Location', {
+                locationArea
+              })
+            }
+            color="#4bcbcc"
+          >
+            Locate
+          </Button>
+          <Button
+            mode="contained"
+            onPress={() =>
+              navigate('Evolutions', {
+                locationArea
+              })
+            }
+            color="#84ffff"
+          >
+            Evolutions
+          </Button>
+        </RowItems>
       </Container>
     </ScrollView>
   );
