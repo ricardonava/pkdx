@@ -8,12 +8,12 @@ import SearchComponent from './SearchComponent';
 const Screen = styled.View`
   flex: 1;
   justify-content: flex-start;
+  background-color: #ff5252;
 `;
 
 const HomeScreen = ({ navigation }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [pkmnInfo, setPkmnInfo] = useState(undefined);
-  const [error, setError] = useState(null);
 
   const searchByName = async (query) => {
     setIsSearching((searching) => !searching);
@@ -57,11 +57,7 @@ const HomeScreen = ({ navigation }) => {
       {isSearching ? (
         <ActivityIndicator />
       ) : (
-        <InfoComponent
-          navigation={navigation}
-          pkmnInfo={pkmnInfo}
-          error={error}
-        />
+        <InfoComponent navigation={navigation} pkmnInfo={pkmnInfo} />
       )}
     </Screen>
   );
