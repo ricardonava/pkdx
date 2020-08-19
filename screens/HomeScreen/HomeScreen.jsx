@@ -13,35 +13,40 @@ const Screen = styled.View`
 const HomeScreen = ({ navigation }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [pkmnInfo, setPkmnInfo] = useState(undefined);
+  const [error, setError] = useState(null);
 
   const searchByName = async (query) => {
     setIsSearching((searching) => !searching);
 
-    const endpoint = `https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`;
-    const response = await fetch(endpoint);
-    const data = await response.json();
+    try {
+      const endpoint = `https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`;
+      const response = await fetch(endpoint);
+      const data = await response.json();
 
-    const {
-      name,
-      id,
-      sprites,
-      stats,
-      types,
-      height,
-      weight,
-      location_area_encounters: locationArea
-    } = data;
+      const {
+        name,
+        id,
+        sprites,
+        stats,
+        types,
+        height,
+        weight,
+        location_area_encounters: locationArea
+      } = data;
 
-    setPkmnInfo({
-      name,
-      id,
-      sprite: sprites.other['official-artwork'].front_default,
-      stats,
-      types,
-      height: height / 10,
-      weight: weight / 10,
-      locationArea
-    });
+      setPkmnInfo({
+        name,
+        id,
+        sprite: sprites.other['official-artwork'].front_default,
+        stats,
+        types,
+        height: height / 10,
+        weight: weight / 10,
+        locationArea
+      });
+    } catch (err) {
+      setPkmnInfo(null);
+    }
 
     setIsSearching((searching) => !searching);
   };
@@ -52,7 +57,11 @@ const HomeScreen = ({ navigation }) => {
       {isSearching ? (
         <ActivityIndicator />
       ) : (
-        <InfoComponent navigation={navigation} pkmnInfo={pkmnInfo} />
+        <InfoComponent
+          navigation={navigation}
+          pkmnInfo={pkmnInfo}
+          error={error}
+        />
       )}
     </Screen>
   );

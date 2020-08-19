@@ -28,9 +28,15 @@ const Name = styled(Headline)`
 const InfoComponent = (props) => {
   const { pkmnInfo, navigation } = props;
   const { navigate } = navigation;
+
   if (pkmnInfo === undefined) {
-    return <Text>Search Something!</Text>;
+    return <Title>Search Pokemon!</Title>;
   }
+
+  if (pkmnInfo === null) {
+    return <Title>Pokemon not found!</Title>;
+  }
+
   const {
     name,
     id,
