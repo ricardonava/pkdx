@@ -1,6 +1,8 @@
 import { PropTypes } from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import { ActivityIndicator } from 'react-native-paper';
 import styled from 'styled-components/native';
+import InfoComponent from './InfoComponent';
 import SearchComponent from './SearchComponent';
 
 const Screen = styled.View`
@@ -8,13 +10,53 @@ const Screen = styled.View`
   justify-content: flex-start;
 `;
 
-function HomeScreen({ navigation }) {
+const HomeScreen = ({ navigation }) => {
+  const [isSearching, setIsSearching] = useState(false);
+  const [pkmnInfo, setPkmnInfo] = useState(undefined);
+
+  const searchByName = async (query) => {
+    setIsSearching((searching) => !searching);
+
+    const endpoint = `https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`;
+    const response = await fetch(endpoint);
+    const data = await response.json();
+
+    const {
+      name,
+      id,
+      sprites,
+      stats,
+      types,
+      height,
+      weight,
+      location_area_encounters: locationArea
+    } = data;
+
+    setPkmnInfo({
+      name,
+      id,
+      sprite: sprites.other['official-artwork'].front_default,
+      stats,
+      types,
+      height: height / 10,
+      weight: weight / 10,
+      locationArea
+    });
+
+    setIsSearching((searching) => !searching);
+  };
+
   return (
     <Screen>
-      <SearchComponent navigation={navigation} />
+      <SearchComponent searchByName={searchByName} />
+      {isSearching ? (
+        <ActivityIndicator />
+      ) : (
+        <InfoComponent navigation={navigation} pkmnInfo={pkmnInfo} />
+      )}
     </Screen>
   );
-}
+};
 
 HomeScreen.propTypes = {
   navigation: PropTypes.objectOf(PropTypes.func).isRequired

@@ -1,45 +1,70 @@
 /* eslint-disable react/prop-types */
+// import PropTypes from 'prop-types';
 import React from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { Avatar, Headline, Text, Title } from 'react-native-paper';
+import { ScrollView } from 'react-native';
+import { Headline, Text, Title, Button } from 'react-native-paper';
+import styled from 'styled-components/native';
 
-const styles = StyleSheet.create({
-  infoContainer: {
-    margin: 20,
-    alignItems: 'center'
-  },
-  pkmnId: {
-    color: 'red',
-    alignSelf: 'flex-end'
-  },
-  avatar: {
-    backgroundColor: 'transparent'
-  },
-  name: {},
-  type: {}
-});
+const Container = styled.View`
+  margin: 20px;
+  align-items: center;
+`;
 
-const InfoComponent = ({ pkmnInfo }) => {
-  const { name, id, sprite, stats, types, height, weight } = pkmnInfo;
-  if (pkmnInfo === false) {
+const Id = styled(Title)`
+  color: red;
+  align-self: flex-end;
+`;
+
+const PokemonAvatar = styled.Image`
+  background-color: transparent;
+  height: 300px;
+  width: 300px;
+`;
+
+const Name = styled(Headline)`
+  text-transform: capitalize;
+`;
+
+const InfoComponent = (props) => {
+  const { pkmnInfo, navigation } = props;
+  const { navigate } = navigation;
+  if (pkmnInfo === undefined) {
     return <Text>Search Something!</Text>;
   }
+  const {
+    name,
+    id,
+    sprite,
+    stats,
+    types,
+    height,
+    weight,
+    locationArea
+  } = pkmnInfo;
+
   return (
     <ScrollView>
-      <View style={styles.infoContainer}>
-        <Title style={styles.pkmnId}>#{id}</Title>
-        <Avatar.Image
-          size={200}
+      <Container>
+        <Button
+          mode="contained"
+          onPress={() =>
+            navigate('Location', {
+              locationArea
+            })
+          }
+        >
+          Encounters
+        </Button>
+
+        <Id>#{id}</Id>
+        <PokemonAvatar
           source={{
             uri: sprite
           }}
-          style={styles.avatar}
         />
-        <Headline style={styles.name}>{name}</Headline>
+        <Name>{name}</Name>
         {types.map((type) => (
-          <Text style={styles.type} key={type.type.name}>
-            {type.type.name}
-          </Text>
+          <Text key={type.type.name}>{type.type.name}</Text>
         ))}
         <Title>{weight} KG</Title>
         <Title>{height} M</Title>
@@ -50,9 +75,13 @@ const InfoComponent = ({ pkmnInfo }) => {
             <Text>{stat['base_stat']}</Text>
           </>
         ))}
-      </View>
+      </Container>
     </ScrollView>
   );
 };
+
+// InfoComponent.propTypes = {
+//   navigation: PropTypes.objectOf().isRequired
+// };
 
 export default InfoComponent;

@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 import Header from '../components/Header';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
-// import PokemonScreen from '../screens/PokemonScreen';
+import LocationScreen from '../screens/LocationScreen/LocationScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,13 +18,13 @@ const StackNav = () => {
           title: 'PKDX'
         }}
       />
-      {/* <Stack.Screen
-        name="Pokemon"
-        component={PokemonScreen}
+      <Stack.Screen
+        name="Location"
+        component={LocationScreen}
         options={{
-          title: 'Pokemon'
+          title: 'Location Area'
         }}
-      /> */}
+      />
     </>
   );
   return (
