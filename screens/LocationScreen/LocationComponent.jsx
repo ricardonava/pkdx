@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { List, Title, Divider } from 'react-native-paper';
-import styled from 'styled-components/native';
+import { Divider, List, Title } from 'react-native-paper';
 
 const ListItem = ({ title }) => <List.Item title={title} />;
 
