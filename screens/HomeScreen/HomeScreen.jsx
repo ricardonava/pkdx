@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components/native';
-import SearchComponent from '../components/SearchComponent';
+import SearchComponent from './SearchComponent';
 
 const Screen = styled.View`
   flex: 1;

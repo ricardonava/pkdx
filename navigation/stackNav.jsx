@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 import Header from '../components/Header';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
 // import PokemonScreen from '../screens/PokemonScreen';
 
 const Stack = createStackNavigator();
