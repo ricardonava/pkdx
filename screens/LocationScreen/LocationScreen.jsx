@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
 import styled from 'styled-components/native';
@@ -8,6 +7,10 @@ import searchPokemonLocation from '../../utils/searchPokemonLocation';
 const Screen = styled.View`
   flex: 1;
   justify-content: flex-start;
+`;
+
+const Loading = styled(ActivityIndicator)`
+  margin: auto;
 `;
 
 const LocationScreen = ({ route }) => {
@@ -29,7 +32,7 @@ const LocationScreen = ({ route }) => {
   return (
     <Screen>
       {isSearching ? (
-        <ActivityIndicator />
+        <Loading color="#c50e29" size="large" />
       ) : (
         <LocationComponent locationInfo={locationInfo} />
       )}

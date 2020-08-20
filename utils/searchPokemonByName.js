@@ -3,9 +3,9 @@ export default function searchPokemonByName(setIsSearching, setPkmnInfo) {
     setIsSearching((searching) => !searching);
 
     try {
-      const endpoint = `https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`;
-      const response = await fetch(endpoint);
-      const data = await response.json();
+      const pokemonEndpoint = `https://pokeapi.co/api/v2/pokemon/${query.toLowerCase()}`;
+      const pokemonResponse = await fetch(pokemonEndpoint);
+      const pokemonData = await pokemonResponse.json();
       const speciesEndpoint = `https://pokeapi.co/api/v2/pokemon-species/${query.toLowerCase()}`;
       const speciesResponse = await fetch(speciesEndpoint);
       const speciesData = await speciesResponse.json();
@@ -19,7 +19,7 @@ export default function searchPokemonByName(setIsSearching, setPkmnInfo) {
         height,
         weight,
         location_area_encounters: locationArea
-      } = data;
+      } = pokemonData;
 
       const { evolution_chain: evolutions } = speciesData;
 

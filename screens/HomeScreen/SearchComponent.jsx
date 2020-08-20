@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Searchbar } from 'react-native-paper';
 import styled from 'styled-components/native';
@@ -23,10 +22,6 @@ const SearchComponent = (props) => {
       />
     </>
   );
-};
-
-SearchComponent.propTypes = {
-  searchByName: PropTypes.func.isRequired
 };
 
 export default SearchComponent;

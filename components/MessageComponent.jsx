@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Headline } from 'react-native-paper';
 import styled from 'styled-components/native';

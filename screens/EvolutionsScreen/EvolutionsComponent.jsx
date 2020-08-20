@@ -1,10 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import { Divider, List } from 'react-native-paper';
 import MessageComponent from '../../components/MessageComponent';
 
-const ListItem = ({ title }) => <List.Item key={title} title={title} />;
+const ListItem = ({ title }) => <List.Item title={title} />;
 
 const EvolutionsComponent = (props) => {
   const { evolutionsInfo } = props;
@@ -18,7 +17,7 @@ const EvolutionsComponent = (props) => {
     <FlatList
       data={evolutionsInfo}
       renderItem={renderItem}
-      keyExtractor={(item) => item.name}
+      keyExtractor={(item) => item.species_name}
       ItemSeparatorComponent={Divider}
     />
   );

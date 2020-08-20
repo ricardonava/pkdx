@@ -5,13 +5,15 @@ export default function makeEvolutionsChain(data) {
   do {
     const numberOfEvolutions = evoData['evolves_to'].length;
     evoChain.push({
-      species_name: evoData.species.name
+      species_name: evoData.species.name.replace(/^\w/, (c) => c.toUpperCase())
     });
 
     if (numberOfEvolutions > 1) {
-      for (let i = 1; i < numberOfEvolutions; i++) {
+      for (let i = 1; i < numberOfEvolutions; i += 1) {
         evoChain.push({
-          species_name: evoData.evolves_to[i].species.name
+          species_name: evoData.evolves_to[i].species.name.replace(/^\w/, (c) =>
+            c.toUpperCase()
+          )
         });
       }
     }

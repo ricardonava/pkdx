@@ -1,4 +1,3 @@
-import { PropTypes } from 'prop-types';
 import React from 'react';
 import { Appbar } from 'react-native-paper';
 import styled from 'styled-components/native';
@@ -30,18 +29,6 @@ const Header = ({ scene, previous, navigation }) => {
       <Appbar.Content title={title} />
     </AppbarHeader>
   );
-};
-
-Header.defaultProps = {
-  previous: undefined,
-  scene: undefined,
-  navigation: undefined
-};
-
-Header.propTypes = {
-  scene: PropTypes.objectOf(Object),
-  navigation: PropTypes.objectOf(PropTypes.func),
-  previous: PropTypes.objectOf(Object)
 };
 
 export default Header;

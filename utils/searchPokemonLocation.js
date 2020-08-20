@@ -11,7 +11,9 @@ export default function searchPokemonLocation(
     const data = await response.json();
     const locationArray = data.map((location) => {
       const { location_area: area } = location;
-      const name = area.name.replace(/-/g, ' ');
+      const name = area.name
+        .replace(/^\w/, (c) => c.toUpperCase())
+        .replace(/-/g, ' ');
       return { name };
     });
 

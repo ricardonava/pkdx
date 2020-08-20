@@ -1,11 +1,9 @@
-/* eslint-disable react/no-unused-prop-types */
 import { createStackNavigator } from '@react-navigation/stack';
-import { PropTypes } from 'prop-types';
 import React from 'react';
 import Header from '../components/Header';
+import EvolutionsScreen from '../screens/EvolutionsScreen/EvolutionsScreen';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import LocationScreen from '../screens/LocationScreen/LocationScreen';
-import EvolutionsScreen from '../screens/EvolutionsScreen/EvolutionsScreen';
 
 const Stack = createStackNavigator();
 
@@ -51,18 +49,6 @@ const StackNav = () => {
       {screen}
     </Stack.Navigator>
   );
-};
-
-StackNav.defaultProps = {
-  previous: undefined,
-  scene: undefined,
-  navigation: undefined
-};
-
-StackNav.propTypes = {
-  scene: PropTypes.objectOf(Object),
-  navigation: PropTypes.objectOf(PropTypes.func),
-  previous: PropTypes.objectOf(Object)
 };
 
 export default StackNav;
