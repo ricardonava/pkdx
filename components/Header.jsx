@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 
 const AppbarHeader = styled(Appbar.Header)`
   elevation: 20;
+  background-color: #c50e29;
 `;
 
 function setTitle(options, scene) {
