@@ -14,7 +14,7 @@ const Container = styled.View`
 const Id = styled(Title)`
   color: white;
   align-self: flex-end;
-  background-color: #c50e29;
+  background-color: #ff5252;
   border-radius: 5px;
   padding: 1px 4px;
 `;
@@ -27,23 +27,29 @@ const PokemonAvatar = styled.Image`
 
 const RowItems = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  margin-bottom: 10px;
 `;
 
 const Type = styled(Title)`
-  background-color: white;
+  background-color: #ff867f;
   border-radius: 5px;
   margin: 5px;
-  padding: 1px 4px;
-  justify-content: center;
+  min-width: 150px;
+  padding: 40px 0px;
+  text-align: center;
 `;
 
 const H1 = styled(Headline)`
   text-transform: capitalize;
-  background-color: #c50e29;
+  background-color: #ff5252;
   color: white;
   padding: 40px 40px;
   border-radius: 5px;
+`;
+
+const NavigationButton = styled(Button)`
+  width: 150px;
+  margin: 5px;
 `;
 
 const InfoComponent = (props) => {
@@ -62,16 +68,41 @@ const InfoComponent = (props) => {
     name,
     id,
     sprite,
-    // stats,
     types,
     height,
     weight,
-    locationArea
+    locationArea,
+    evolutionsUrl
   } = pkmnInfo;
 
   return (
     <ScrollView>
       <Container>
+        <RowItems>
+          <NavigationButton
+            mode="contained"
+            onPress={() =>
+              navigate('Location', {
+                locationArea
+              })
+            }
+            color="#c50e29"
+          >
+            Locate
+          </NavigationButton>
+          <NavigationButton
+            mode="contained"
+            onPress={() =>
+              navigate('Evolutions', {
+                evolutionsUrl
+              })
+            }
+            color="#c50e29"
+          >
+            Evolutions
+          </NavigationButton>
+        </RowItems>
+
         <Id>#{id}</Id>
         <H1>{name}</H1>
         <PokemonAvatar
@@ -86,39 +117,8 @@ const InfoComponent = (props) => {
           ))}
         </RowItems>
         <RowItems>
-          <Type>{weight} KG </Type>
-          <Type> {height} M</Type>
-        </RowItems>
-        {/* <H1>Base Stats</H1>
-        {stats.map((stat) => (
-          <RowItems>
-            <Text>{stat.stat.name}: </Text>
-            <Text>{stat['base_stat']}</Text>
-          </RowItems>
-        ))} */}
-        <RowItems>
-          <Button
-            mode="contained"
-            onPress={() =>
-              navigate('Location', {
-                locationArea
-              })
-            }
-            color="#4bcbcc"
-          >
-            Locate
-          </Button>
-          <Button
-            mode="contained"
-            onPress={() =>
-              navigate('Evolutions', {
-                locationArea
-              })
-            }
-            color="#84ffff"
-          >
-            Evolutions
-          </Button>
+          <Type>{weight}</Type>
+          <Type>{height}</Type>
         </RowItems>
       </Container>
     </ScrollView>

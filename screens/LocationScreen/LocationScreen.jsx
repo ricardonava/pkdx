@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native-paper';
 import styled from 'styled-components/native';
 import LocationComponent from './LocationComponent';
+import searchPokemonLocation from '../../utils/searchPokemonLocation';
 
 const Screen = styled.View`
   flex: 1;
@@ -15,21 +16,11 @@ const LocationScreen = ({ route }) => {
   const [isSearching, setIsSearching] = useState(false);
   const [locationInfo, setLocationInfo] = useState([]);
 
-  const searchLocation = async () => {
-    setIsSearching((searching) => !searching);
-
-    const endpoint = locationArea;
-    const response = await fetch(endpoint);
-    const data = await response.json();
-    const locationArray = data.map((location) => {
-      const { location_area: area } = location;
-      const name = area.name.replace(/-/g, ' ');
-      return { name };
-    });
-
-    setLocationInfo(locationArray);
-    setIsSearching((searching) => !searching);
-  };
+  const searchLocation = searchPokemonLocation(
+    setIsSearching,
+    locationArea,
+    setLocationInfo
+  );
 
   useEffect(() => {
     searchLocation();
