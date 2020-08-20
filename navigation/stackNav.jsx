@@ -5,6 +5,7 @@ import React from 'react';
 import Header from '../components/Header';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import LocationScreen from '../screens/LocationScreen/LocationScreen';
+import EvolutionsScreen from '../screens/EvolutionsScreen/EvolutionsScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,10 @@ const StackNav = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'PKDX'
+          title: 'PKDX',
+          headerStyle: {
+            backgroundColor: '#c50e29'
+          }
         }}
       />
       <Stack.Screen
@@ -23,6 +27,13 @@ const StackNav = () => {
         component={LocationScreen}
         options={{
           title: 'Location Area'
+        }}
+      />
+      <Stack.Screen
+        name="Evolutions"
+        component={EvolutionsScreen}
+        options={{
+          title: 'Evolutions'
         }}
       />
     </>
