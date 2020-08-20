@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { Divider, List, Title } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
+import MessageComponent from '../../components/MessageComponent';
 
 const ListItem = ({ title }) => <List.Item key={title} title={title} />;
 
@@ -10,7 +11,7 @@ const EvolutionsComponent = (props) => {
   const renderItem = ({ item }) => <ListItem title={item.species_name} />;
 
   if (!Array.isArray(evolutionsInfo) || evolutionsInfo.length === 1) {
-    return <Title>Pokemon has no Evolutions!!</Title>;
+    return <MessageComponent>Pokemon has no Evolutions!!</MessageComponent>;
   }
 
   return (

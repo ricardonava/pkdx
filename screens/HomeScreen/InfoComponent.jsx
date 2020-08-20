@@ -5,6 +5,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { Button, Headline, Title } from 'react-native-paper';
 import styled from 'styled-components/native';
+import MessageComponent from '../../components/MessageComponent';
 
 const Container = styled.View`
   margin: 20px;
@@ -57,11 +58,11 @@ const InfoComponent = (props) => {
   const { navigate } = navigation;
 
   if (pkmnInfo === undefined) {
-    return <Title>Search Pokemon!</Title>;
+    return <MessageComponent>Search Pokemon!</MessageComponent>;
   }
 
   if (pkmnInfo === null) {
-    return <Title>Pokemon not found!</Title>;
+    return <MessageComponent>Pokemon not found!</MessageComponent>;
   }
 
   const {
@@ -102,7 +103,6 @@ const InfoComponent = (props) => {
             Evolutions
           </NavigationButton>
         </RowItems>
-
         <Id>#{id}</Id>
         <H1>{name}</H1>
         <PokemonAvatar
@@ -110,15 +110,14 @@ const InfoComponent = (props) => {
             uri: sprite
           }}
         />
-
         <RowItems>
           {types.map((type) => (
             <Type key={type.type.name}>{type.type.name}</Type>
           ))}
         </RowItems>
         <RowItems>
-          <Type>{weight}</Type>
-          <Type>{height}</Type>
+          <Type>{weight} KG</Type>
+          <Type>{height} M</Type>
         </RowItems>
       </Container>
     </ScrollView>

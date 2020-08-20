@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { Divider, List, Title } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
+import MessageComponent from '../../components/MessageComponent';
 
 const ListItem = ({ title }) => <List.Item title={title} />;
 
@@ -10,7 +11,7 @@ const LocationComponent = (props) => {
   const renderItem = ({ item }) => <ListItem title={item.name} />;
 
   if (!Array.isArray(locationInfo) || !locationInfo.length) {
-    return <Title>No location found!!</Title>;
+    return <MessageComponent>No location found!!</MessageComponent>;
   }
 
   return (
