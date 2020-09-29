@@ -4,8 +4,6 @@ A React-Native app made with EXPO, RN Paper, react-navigation, and the Pokekon A
 
 ## Appetize.io
 
-[iOS](https://appetize.io/app/qxxt8zvhdgn559zdnwv7zh08m8)
-
 [android](https://appetize.io/app/70b53366rxqhpq1xwgznb10ue4)
 
 ## Android APK AWS
