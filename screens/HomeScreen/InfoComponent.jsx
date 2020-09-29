@@ -1,9 +1,9 @@
 /* eslint-disable dot-notation */
 /* eslint-disable react/prop-types */
 // import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
-import { Button, Headline, Title } from 'react-native-paper';
+import { ActivityIndicator, Button, Headline, Title } from 'react-native-paper';
 import styled from 'styled-components/native';
 import MessageComponent from '../../components/MessageComponent';
 
@@ -48,6 +48,12 @@ const H1 = styled(Headline)`
   border-radius: 5px;
 `;
 
+const Loading = styled(ActivityIndicator)`
+  margin: auto;
+  height: 200px;
+  width: 200px;
+`;
+
 const NavigationButton = styled(Button)`
   width: 150px;
   margin: 5px;
@@ -56,6 +62,8 @@ const NavigationButton = styled(Button)`
 const InfoComponent = (props) => {
   const { pkmnInfo, navigation } = props;
   const { navigate } = navigation;
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   if (pkmnInfo === undefined) {
     return <MessageComponent>Search Pokemon!</MessageComponent>;
@@ -105,10 +113,13 @@ const InfoComponent = (props) => {
         </RowItems>
         <Id>#{id}</Id>
         <H1>{name}</H1>
+        {!imageLoaded && <Loading color="#c50e29" size="large" />}
         <PokemonAvatar
           source={{
             uri: sprite
           }}
+          style={!imageLoaded && { height: 0 }}
+          onLoadEnd={() => setImageLoaded(true)}
         />
         <RowItems>
           {types.map((type) => (
