@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 // import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import { Animated, ScrollView } from 'react-native';
 import { ActivityIndicator, Button, Headline, Title } from 'react-native-paper';
 import styled from 'styled-components/native';
 import MessageComponent from '../../components/MessageComponent';
@@ -20,7 +20,7 @@ const Id = styled(Title)`
   padding: 1px 4px;
 `;
 
-const PokemonAvatar = styled.Image`
+const PokemonAvatar = styled(Animated.Image)`
   background-color: transparent;
   height: 200px;
   width: 200px;
@@ -64,6 +64,7 @@ const InfoComponent = (props) => {
   const { navigate } = navigation;
 
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [opacity] = useState(new Animated.Value(0));
 
   if (pkmnInfo === undefined) {
     return <MessageComponent>Search Pokemon!</MessageComponent>;
@@ -118,8 +119,31 @@ const InfoComponent = (props) => {
           source={{
             uri: sprite
           }}
-          style={!imageLoaded && { height: 0 }}
-          onLoadEnd={() => setImageLoaded(true)}
+          style={
+            !imageLoaded
+              ? { height: 0 }
+              : [
+                  {
+                    opacity,
+                    transform: [
+                      {
+                        scale: opacity.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [0.85, 1]
+                        })
+                      }
+                    ]
+                  }
+                ]
+          }
+          onLoadEnd={() => {
+            setImageLoaded(true);
+            Animated.timing(opacity, {
+              toValue: 1,
+              duration: 500,
+              useNativeDriver: true
+            }).start();
+          }}
         />
         <RowItems>
           {types.map((type) => (
