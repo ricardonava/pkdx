@@ -6,9 +6,6 @@ A React-Native app made with EXPO, RN Paper, react-navigation, and the Pokekon A
 
 [android](https://appetize.io/app/70b53366rxqhpq1xwgznb10ue4)
 
-## Android APK AWS
-
-[DOWNLOAD](https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40ricardonava/pkdx-2914570a2f614c35b1afba6dff211488-signed.apk)
 
 # Serverless Stack
 
