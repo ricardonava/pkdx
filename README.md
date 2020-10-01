@@ -1,3 +1,7 @@
+# **_PREVIEWS AND FILES NOT UPDATED_** 9/30/2020
+
+## I was sleepy
+
 # PKDX
 
 A React-Native app made with EXPO, RN Paper, react-navigation, and the Pokekon API.
