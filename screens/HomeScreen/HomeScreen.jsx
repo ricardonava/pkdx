@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native-paper';
+import { gql, useLazyQuery } from '@apollo/client';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import searchPokemonByName from '../../utils/searchPokemonByName';
 import InfoComponent from './InfoComponent';
 import SearchComponent from './SearchComponent';
 
@@ -10,24 +9,40 @@ const Screen = styled.View`
   justify-content: flex-start;
 `;
 
-const Loading = styled(ActivityIndicator)`
-  margin: auto;
+const GET_A_POKEMON = gql`
+  query getAPokemon($name: String!) {
+    pokemon(name: $name) {
+      name
+      id
+      sprite
+      types
+      height
+      weight
+      locationsUrl
+      evolutionsUrl
+      color
+    }
+  }
 `;
 
 const HomeScreen = ({ navigation }) => {
-  const [isSearching, setIsSearching] = useState(false);
-  const [pkmnInfo, setPkmnInfo] = useState(undefined);
-
-  const searchByName = searchPokemonByName(setIsSearching, setPkmnInfo);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [loadPokemon, { called, loading, data }] = useLazyQuery(GET_A_POKEMON);
 
   return (
     <Screen>
-      <SearchComponent searchByName={searchByName} />
-      {isSearching ? (
-        <Loading color="#c50e29" size="large" />
-      ) : (
-        <InfoComponent navigation={navigation} pkmnInfo={pkmnInfo} />
-      )}
+      <SearchComponent
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        loadPokemon={loadPokemon}
+      />
+      <InfoComponent
+        navigation={navigation}
+        query={searchQuery}
+        loading={loading}
+        data={data}
+        called={called}
+      />
     </Screen>
   );
 };

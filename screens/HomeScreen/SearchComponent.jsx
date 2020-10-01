@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Searchbar } from 'react-native-paper';
 import styled from 'styled-components/native';
 
@@ -7,8 +7,7 @@ const Search = styled(Searchbar)`
 `;
 
 const SearchComponent = (props) => {
-  const { searchByName } = props;
-  const [searchQuery, setSearchQuery] = useState('');
+  const { loadPokemon, searchQuery, setSearchQuery } = props;
 
   const onChangeSearch = (query) => setSearchQuery(query);
 
@@ -18,7 +17,11 @@ const SearchComponent = (props) => {
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
-        onSubmitEditing={() => searchByName(searchQuery)}
+        onSubmitEditing={() =>
+          loadPokemon({
+            variables: { name: searchQuery }
+          })
+        }
       />
     </>
   );

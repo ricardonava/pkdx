@@ -60,19 +60,16 @@ const NavigationButton = styled(Button)`
 `;
 
 const InfoComponent = (props) => {
-  const { pkmnInfo, navigation } = props;
+  const { navigation, data, loading, called } = props;
   const { navigate } = navigation;
-
   const [imageLoaded, setImageLoaded] = useState(false);
   const [opacity] = useState(new Animated.Value(0));
 
-  if (pkmnInfo === undefined) {
-    return <MessageComponent>Search Pokemon!</MessageComponent>;
-  }
+  if (!called) return <MessageComponent>Search Pokemon!</MessageComponent>;
 
-  if (pkmnInfo === null) {
-    return <MessageComponent>Pokemon not found!</MessageComponent>;
-  }
+  if (called && loading) return <Loading color="#c50e29" size="large" />;
+
+  if (!data) return <MessageComponent>Pokemon not found!</MessageComponent>;
 
   const {
     name,
@@ -81,9 +78,10 @@ const InfoComponent = (props) => {
     types,
     height,
     weight,
-    locationArea,
-    evolutionsUrl
-  } = pkmnInfo;
+    locationsUrl,
+    evolutionsUrl,
+    color
+  } = data.pokemon;
 
   return (
     <ScrollView>
@@ -93,10 +91,11 @@ const InfoComponent = (props) => {
             mode="contained"
             onPress={() =>
               navigate('Location', {
-                locationArea
+                locationsUrl
               })
             }
-            color="#c50e29"
+            color={color}
+            disabled={!locationsUrl && 'disabled'}
           >
             Locate
           </NavigationButton>
@@ -107,14 +106,15 @@ const InfoComponent = (props) => {
                 evolutionsUrl
               })
             }
-            color="#c50e29"
+            color={color}
+            disabled={!evolutionsUrl && 'disabled'}
           >
             Evolutions
           </NavigationButton>
         </RowItems>
         <Id>#{id}</Id>
         <H1>{name}</H1>
-        {!imageLoaded && <Loading color="#c50e29" size="large" />}
+        {!imageLoaded && <Loading color={color} size="large" />}
         <PokemonAvatar
           source={{
             uri: sprite
@@ -147,7 +147,7 @@ const InfoComponent = (props) => {
         />
         <RowItems>
           {types.map((type) => (
-            <Type key={type.type.name}>{type.type.name}</Type>
+            <Type key={type}>{type}</Type>
           ))}
         </RowItems>
         <RowItems>
