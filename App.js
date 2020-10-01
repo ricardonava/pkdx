@@ -1,8 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, AppRegistry } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { RootNavigator } from './navigation/rootNavigator';
+
+// Create the client as outlined in the setup guide
+const client = new ApolloClient({
+  cache: new InMemoryCache()
+});
 
 const theme = {
   ...DefaultTheme,
@@ -14,9 +20,13 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider theme={theme}>
-      {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-      <RootNavigator />
-    </PaperProvider>
+    <ApolloProvider client={client}>
+      <PaperProvider theme={theme}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+        <RootNavigator />
+      </PaperProvider>
+    </ApolloProvider>
   );
 }
+
+AppRegistry.registerComponent('PKDX', () => App);
