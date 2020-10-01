@@ -13,9 +13,8 @@ const Container = styled.View`
 `;
 
 const Id = styled(Title)`
-  color: white;
   align-self: flex-end;
-  background-color: #ff5252;
+  background-color: ${(props) => props.color};
   border-radius: 5px;
   padding: 1px 4px;
 `;
@@ -32,7 +31,7 @@ const RowItems = styled.View`
 `;
 
 const Type = styled(Title)`
-  background-color: #ff867f;
+  background-color: ${(props) => props.color};
   border-radius: 5px;
   margin: 5px;
   min-width: 150px;
@@ -42,8 +41,7 @@ const Type = styled(Title)`
 
 const H1 = styled(Headline)`
   text-transform: capitalize;
-  background-color: #ff5252;
-  color: white;
+  background-color: ${(props) => props.color};
   padding: 40px 40px;
   border-radius: 5px;
 `;
@@ -112,8 +110,8 @@ const InfoComponent = (props) => {
             Evolutions
           </NavigationButton>
         </RowItems>
-        <Id>#{id}</Id>
-        <H1>{name}</H1>
+        <Id color={color}>#{id}</Id>
+        <H1 color={color}>{name}</H1>
         {!imageLoaded && <Loading color={color} size="large" />}
         <PokemonAvatar
           source={{
@@ -147,12 +145,14 @@ const InfoComponent = (props) => {
         />
         <RowItems>
           {types.map((type) => (
-            <Type key={type}>{type}</Type>
+            <Type color={color} key={type}>
+              {type}
+            </Type>
           ))}
         </RowItems>
         <RowItems>
-          <Type>{weight} KG</Type>
-          <Type>{height} M</Type>
+          <Type color={color}>{weight} KG</Type>
+          <Type color={color}>{height} M</Type>
         </RowItems>
       </Container>
     </ScrollView>
