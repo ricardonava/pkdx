@@ -6,6 +6,7 @@ import { Animated, ScrollView } from 'react-native';
 import { ActivityIndicator, Button, Headline, Title } from 'react-native-paper';
 import styled from 'styled-components/native';
 import MessageComponent from '../../components/MessageComponent';
+import contrastText from '../../utils/contrastText';
 
 const Container = styled.View`
   margin: 20px;
@@ -13,6 +14,7 @@ const Container = styled.View`
 `;
 
 const Id = styled(Title)`
+  color: ${(props) => contrastText(props.color)};
   align-self: flex-end;
   background-color: ${(props) => props.color};
   border-radius: 5px;
@@ -32,6 +34,7 @@ const RowItems = styled.View`
 
 const Type = styled(Title)`
   background-color: ${(props) => props.color};
+  color: ${(props) => contrastText(props.color)};
   border-radius: 5px;
   margin: 5px;
   min-width: 150px;
@@ -41,6 +44,7 @@ const Type = styled(Title)`
 
 const H1 = styled(Headline)`
   text-transform: capitalize;
+  color: ${(props) => contrastText(props.color)};
   background-color: ${(props) => props.color};
   padding: 40px 40px;
   border-radius: 5px;
